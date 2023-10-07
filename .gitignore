@@ -104,6 +104,8 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+Dataset.zip
+Project_IE643/Dataset/
 .env
 .venv
 env/
