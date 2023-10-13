@@ -7,7 +7,7 @@ import evals
 from utils import build_path, get_label, get_feat, THRESHOLDS
 from model import VAE, compute_loss
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device('cuda')
 sys.path.append('./')
 
 
@@ -24,6 +24,7 @@ def test(args):
     vae = VAE(args)
     vae.load_state_dict(torch.load(args.checkpoint_path, map_location=device))
     vae.eval()
+    vae.to(device) # Changed
 
     print("loaded model: %s" % (args.checkpoint_path))
 
@@ -58,6 +59,8 @@ def test(args):
             input_label = deepcopy(input_label).float().to(device)
 
             with torch.no_grad():
+                input_label.to(device) #Changed
+                input_feat.to(device) #Changed
                 output = vae(input_label, input_feat) 
                 total_loss, nll_loss, nll_loss_x, c_loss, c_loss_x, kl_loss, cpc_loss, _, pred_x = compute_loss(input_label, output, args)
 
