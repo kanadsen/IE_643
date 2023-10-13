@@ -21,7 +21,7 @@ class VAE(nn.Module):
     def __init__(self, args):
         super(VAE, self).__init__()
         self.args = args
-        self.dropout = nn.Dropout(p=args.keep_prob)
+        self.dropout = nn.Dropout(p=args.drop)
 
         self.base_model=base_class(args)
         
